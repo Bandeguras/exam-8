@@ -1,8 +1,9 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from webapp.models import Product
+from webapp.models import Product, Review
 from webapp.form import ProductForm
-from django.views.generic import RedirectView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic.list import MultipleObjectMixin
 
 
 class ProductIndexViews(ListView):
@@ -15,6 +16,13 @@ class ProductIndexViews(ListView):
 class ProductView(DetailView):
     template_name = 'product/product_view.html'
     model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = self.object
+        reviews = product.reviews.order_by('-created_at')
+        context['reviews'] = reviews
+        return context
 
 
 class ProductCreateView(CreateView):
