@@ -1,10 +1,10 @@
 from django.contrib.auth import get_user_model, login
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import CreateView, DetailView
-from django.views.generic.list import MultipleObjectMixin
+from django.views.generic import CreateView, DetailView, UpdateView
 
-from account.form import MyUserCreationForm
+
+from account.form import MyUserCreationForm, UserChangeForm
 
 
 class RegisterView(CreateView):
@@ -40,3 +40,12 @@ class UserDetailView(DetailView):
         review = user.reviews.order_by('-created_at')
         context['reviews'] = review
         return context
+
+
+class UserChangeView(UpdateView):
+    model = get_user_model()
+    form_class = UserChangeForm
+    template_name = 'user_change.html'
+
+    def get_success_url(self):
+        return reverse('account:detail', kwargs={'pk': self.get_object().pk})
