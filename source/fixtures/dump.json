@@ -1,0 +1,61 @@
+[
+{
+    "model": "webapp.product",
+    "pk": 1,
+    "fields": {
+        "name": "Груша",
+        "category": "food",
+        "description": "sasasasa",
+        "avatar": "product_avatar/1a15d84ed9d616a2e346a1b2368a8d6e_l3OLPjc.jpg"
+    }
+},
+{
+    "model": "webapp.product",
+    "pk": 3,
+    "fields": {
+        "name": "Bug",
+        "category": "clothes",
+        "description": "nb nbb",
+        "avatar": "product_avatar/default.jpg"
+    }
+},
+{
+    "model": "webapp.review",
+    "pk": 1,
+    "fields": {
+        "author": 1,
+        "product": 1,
+        "description": "same text",
+        "rating": 4,
+        "moderated": false,
+        "created_at": "2023-01-14T06:34:20.849Z",
+        "updated_at": "2023-01-14T09:36:12.970Z"
+    }
+},
+{
+    "model": "webapp.review",
+    "pk": 4,
+    "fields": {
+        "author": 1,
+        "product": 1,
+        "description": "sfgsdagsda",
+        "rating": 3,
+        "moderated": true,
+        "created_at": "2023-01-14T09:25:47.235Z",
+        "updated_at": "2023-01-14T11:11:59.879Z"
+    }
+},
+{
+    "model": "webapp.review",
+    "pk": 6,
+    "fields": {
+        "author": 4,
+        "product": 1,
+        "description": "dasdasdas",
+        "rating": 4,
+        "moderated": false,
+        "created_at": "2023-01-14T11:27:12.345Z",
+        "updated_at": "2023-01-14T11:27:12.345Z"
+    }
+}
+]
