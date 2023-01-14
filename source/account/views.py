@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model, login
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
+from django.views.generic.list import MultipleObjectMixin
 
 from account.form import MyUserCreationForm
 
@@ -26,3 +27,16 @@ class RegisterView(CreateView):
             return next_url
 
         return reverse('webapp:product_index')
+
+
+class UserDetailView(DetailView):
+    model = get_user_model()
+    template_name = 'user_detail.html'
+    context_object_name = 'user_obj'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.object
+        review = user.reviews.order_by('-created_at')
+        context['reviews'] = review
+        return context
