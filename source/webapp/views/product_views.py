@@ -13,17 +13,9 @@ class ProductIndexViews(ListView):
     # ordering = ('-created_at',)
 
 #
-# class ArticleView(DetailView):
-#     template_name = 'article/article_view.html'
-#     model = Article
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         article = self.object
-#         comments = article.comments.order_by('-created_at')
-#         context['comments'] = comments
-#         return context
-#
+class ProductView(DetailView):
+    template_name = 'product/product_view.html'
+    model = Product
 #
 # class MyRedirectView(RedirectView):
 #     url = 'https://ccbv.co.uk/projects/Django/4.1/django.views.generic.base/RedirectView/'
