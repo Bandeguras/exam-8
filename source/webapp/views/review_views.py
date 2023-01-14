@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from webapp.models import Product, Review
 from webapp.form import ReviewForm
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 
 class ProductReviewCreateView(CreateView):
@@ -24,7 +24,16 @@ class ReviewUpdateView(UpdateView):
     template_name = 'review/review_update.html'
     model = Review
     form_class = ReviewForm
-    # context_object_name = 'comment'
+
+    def get_success_url(self):
+        return reverse('webapp:product', kwargs={'pk': self.object.product.pk})
+
+
+class ReviewDeleteView(DeleteView):
+    model = Review
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse('webapp:product', kwargs={'pk': self.object.product.pk})
