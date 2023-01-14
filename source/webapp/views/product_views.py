@@ -2,7 +2,7 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from webapp.models import Product
-
+from webapp.form import ProductForm
 from django.views.generic import RedirectView, ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
@@ -12,33 +12,19 @@ class ProductIndexViews(ListView):
     model = Product
     # ordering = ('-created_at',)
 
-#
+
 class ProductView(DetailView):
     template_name = 'product/product_view.html'
     model = Product
-#
-# class MyRedirectView(RedirectView):
-#     url = 'https://ccbv.co.uk/projects/Django/4.1/django.views.generic.base/RedirectView/'
-#
-#
-# class ArticleCreateView(LoginRequiredMixin, CreateView):
-#     template_name = "article/article_create.html"
-#     model = Article
-#     form_class = ArticleForm
-#
-#     def form_valid(self, form):
-#         form.instance.author = self.request.user
-#         return super().form_valid(form)
-#
-#     # def dispatch(self, request, *args, **kwargs):
-#     #     if not request.user.is_authenticated:
-#     #         return redirect('accounts:login')
-#     #     if not request.user.has_perm('webapp.add_article'):
-#     #         raise PermissionDenied
-#     #     return super().dispatch( request, *args, **kwargs)
-#
-#
-#
+
+
+class ProductCreateView(CreateView):
+    template_name = 'product/product_create.html'
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('webapp:product_index')
+
+
 # class ArticleUpdateView(PermissionRequiredMixin, UpdateView):
 #     template_name = "article/article_update.html"
 #     form_class = ArticleForm
