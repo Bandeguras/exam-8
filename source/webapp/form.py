@@ -12,3 +12,10 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['description', 'rating']
+
+
+class ReviewFormModerator(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['description', 'rating', 'moderated']
+

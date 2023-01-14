@@ -23,3 +23,7 @@ class Review(models.Model):
     moderated = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Время изменения")
+
+
+    class Meta:
+        permissions = [('can_moderated', 'Может moderated статус'), ]
