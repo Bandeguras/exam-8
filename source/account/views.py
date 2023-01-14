@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model, login
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, UpdateView
+from django.contrib.auth.views import PasswordChangeView
 
 
 from account.form import MyUserCreationForm, UserChangeForm
@@ -47,5 +48,14 @@ class UserChangeView(UpdateView):
     form_class = UserChangeForm
     template_name = 'user_change.html'
 
+    def get_object(self, queryset=None):
+        return self.request.user
+
     def get_success_url(self):
         return reverse('account:detail', kwargs={'pk': self.get_object().pk})
+
+class UserChangePasswordView(PasswordChangeView):
+    template_name = 'user_change_password.html'
+
+    def get_success_url(self):
+        return reverse('account:user_view', kwargs={'pk': self.request.user.pk})
